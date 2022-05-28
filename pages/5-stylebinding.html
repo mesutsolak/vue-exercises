@@ -43,6 +43,7 @@
         </div>
     </div>
 
+    <div :style="styleOrnek">Hello World!</div>
     </div>
 
     <script
@@ -68,6 +69,11 @@
               id:1,
               isim: 'Cem',
               rol: 'Admin'
+          },
+          //color ve fontsize değerlerinin değişken olarak tanımlanmaması için '' olarak işaretlenmesi gerekir.
+          styleOrnek:{
+              color: 'red',
+              fontSize: '18px'
           }
         },
       });
