@@ -14,27 +14,15 @@
   </head>
   <body>
     <!-- 
-        Veri bind etme yöntemleri ;
-        Mustache , v-text , v-html , v-once , v-model
+         v-bind yazmak yerine : yazılabilir.
+         id'leri + koyarak birleştirebilirsin.
     -->
 
     <div id="app" class="p-5">
-      <p>{{ mesaj }}</p>
-      <p v-text="mesaj_html"></p>
-      <p v-html="mesaj_html"></p>
-      <hr />
-      <div>
-        <label>Mesaj</label>
-        <input type="text" v-model="mesaj_html" class="form-control" />
-      </div>
-      <div>
-        <label>Fiyat</label>
-        <!-- model.number yazmak constraint mantığıyla çalışmaktadır. -->
-        <input type="text" v-model.number="fiyat" class="form-control" />
-        <p>KDV Tutarı : {{ fiyat * 18 / 100 }}</p>
-        <p>{{ (fiyat * 18 / 100)< 5 ? 'KDV Düşük' : 'KDV Yüksek' }}</p>
-        <p v-once>{{ (fiyat *18 /100)<5 ? "KDV Düşük" : "KDV Yüksek" }}</p>
-      </div>
+      <p><a v-bind:href="linkSite" v-bind:title="linkAciklama">{{ linkAciklama }}</a></p>
+      <p><a :href="linkSite" :title="linkAciklama">{{ linkAciklama }}</a></p>
+      <hr>
+      <div :id="'kurs' + id">Kurs {{ id }}</div>
     </div>
 
     <script
@@ -53,9 +41,9 @@
         el: "#app",
         name: "Uzaktan Kurs",
         data: {
-          mesaj: "Hello World",
-          mesaj_html: "Merhaba <b>Cem</b>",
-          fiyat: 12,
+          linkSite: 'http://www.uzaktankurs.com',
+          linkAciklama: 'Uzaktan Kurs',
+          id: 5
         },
       });
     </script>
