@@ -20,6 +20,7 @@
   <body>
     <div id="app" class="p-5">
       <button
+        id="btnNewUserModal"
         class="btn btn-info float-right text-white"
         data-bs-toggle="modal"
         data-bs-target="#newUserModal"
@@ -35,12 +36,23 @@
           <th>Id</th>
           <th>İsim</th>
           <th>Rol</th>
+          <th>İşlemler</th>
         </tr>
         <tr v-for="(user,index) in users">
           <td>{{ index }}</td>
           <td>{{ user.id }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
+          <td>
+            <i
+              class="fa-solid fa-pencil text-warning me-2"
+              @click="userFind(user.id)"
+            ></i>
+            <i
+              class="fa-solid fa-trash text-danger"
+              @click="removeUserId(user.id)"
+            ></i>
+          </td>
         </tr>
       </table>
       <div
@@ -116,6 +128,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="usermanagement.js"></script>
   </body>
 </html>
