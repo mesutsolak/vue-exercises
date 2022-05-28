@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="app" class="p-5">
+      <button
+        class="btn btn-info float-right text-white"
+        data-bs-toggle="modal"
+        data-bs-target="#newUserModal"
+      >
+        <i class="fa-solid fa-user-plus"></i>
+        Yeni Kullanıcı
+      </button>
+      <h1>Kullanıcılar ({{ users.length}} kullanıcı)</h1>
+      <hr />
+      <table class="table table-bordered table-hover">
+        <tr class="bg-success text-white">
+          <th>Index</th>
+          <th>Id</th>
+          <th>İsim</th>
+          <th>Rol</th>
+        </tr>
+        <tr v-for="(user,index) in users">
+          <td>{{ index }}</td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      </table>
+      <div
+        class="modal fade"
+        id="newUserModal"
+        tabindex="-1"
+        aria-labelledby="newUserModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newUserModalLabel">
+                <i class="fa-solid fa-user-plus me-2"></i>Yeni Kullanıcı
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                @click="clearUserAddModal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form @submit.prevent="true">
+                <div :class="alerttype" v-text="alerttext" role="alert"></div>
+                <div class="mb-3">
+                  <label for="emailAddress" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="emailAddress"
+                    v-model="activeUser.email"
+                    placeholder="name@example.com"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="emailAddress" class="form-label"> Rol </label>
+                  <select v-model="activeUser.role" class="form-control">
+                    <option value="Seçiniz" selected disabled>Seçiniz</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                @click="clearUserAddModal"
+              >
+                <i class="fa-solid fa-trash me-2"></i>
+                Temizle
+              </button>
+              <button type="button" class="btn btn-primary" @click="newUser">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Kaydet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="usermanagement.js"></script>
+  </body>
+</html>
