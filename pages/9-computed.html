@@ -17,7 +17,7 @@
     <div id="app">
       <input v-model="firstName" class="form-control" />
       <input v-model="lastName" class="form-control" />
-      <p>{{ firstAndLastName }}</p>
+      <p>{{ firstAndLastNameSetter }}</p>
       <input v-model="productPrice" class="form-control" />
       <p>{{ productKdvPrice }}</p>
     </div>
@@ -47,6 +47,17 @@
           },
           productKdvPrice() {
             return (this.productPrice * 18) / 100;
+          },
+          //Console üzerinden app.firstAndLastNameSetter = "Cihat Solak" yazarak değer set edebilirsin.
+          firstAndLastNameSetter: {
+            get: function () {
+              return this.firstName + " " + this.lastName;
+            },
+            set: function (value) {
+              let parts = value.split(" ");
+              this.firstName = parts[0];
+              this.lastName = parts[1];
+            },
           },
         },
       });
