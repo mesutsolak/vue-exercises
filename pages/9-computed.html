@@ -58,6 +58,7 @@
         rağmen tekrar tekrar çalıştırır.Cache mantığı yoktur.
 
         Computed ve Metot yardımıyla var olan listeyi filtreleyerek gösterebiliriz.
+        Computedlar UI elementlerinde kullanılırken () kullanılmaz.
       */
 
       const app = new Vue({
@@ -75,7 +76,7 @@
             return this.firstName + " " + this.lastName;
           },
           //Metot
-          UsersStartingWithMetot() {
+          UsersStartingWithCMetot() {
             return this.users.filter((user) => user.startsWith("C"));
           },
         },
