@@ -1,11 +1,11 @@
 const userApp = new Vue({
   el: "#app",
-  name: "Remote Users",
+  name: "Remote Course",
   data: {
     message: "Merhaba",
     email: "",
-    alerttype: "",
-    alerttext: "",
+    alertType: "",
+    alertText: "",
     activeUser: { id: 0, role: "Seçiniz" },
     users: [
       {
@@ -27,18 +27,13 @@ const userApp = new Vue({
   },
   methods: {
     newUser() {
+      debugger;
       if (
         this.activeUser.email == undefined ||
         this.activeUser.role == "Seçiniz"
       ) {
-        this.alerttype = "alert alert-danger";
-        this.alerttext = "Lütfen boş bıraktığınız yerleri doldurun.";
-      } else if (
-        this.users.some((user) => user.email == this.activeUser.email) &&
-        this.users.some((user) => user.id == this.activeUser.id)
-      ) {
-        this.alerttype = "alert alert-danger";
-        this.alerttext = "Email zaten kayıtlı.";
+        this.alertType = "alert alert-danger";
+        this.alertText = "Lütfen boş bıraktığınız yerleri doldurun.";
       } else {
         if (!this.users.some((user) => user.id == this.activeUser.id)) {
           this.activeUser.id =
@@ -49,8 +44,8 @@ const userApp = new Vue({
           this.users.push(this.activeUser);
         }
 
-        this.alerttype = "alert alert-success";
-        this.alerttext = "Kullanıcı başarıyla kaydedildi.";
+        this.alertType = "alert alert-success";
+        this.alertText = "Kullanıcı başarıyla kaydedildi.";
         this.clearUser();
       }
     },
@@ -59,12 +54,12 @@ const userApp = new Vue({
     },
     clearUserAddModal() {
       this.clearUser();
-      this.alerttype = "";
-      this.alerttext = "";
+      this.alertType = "";
+      this.alertText = "";
     },
     removeUserIndex(index) {
       this.users.splice(index, 1);
-      //Array içinden bir vei silmek için ikinci yöntem.
+      //Array içinden bir veri silmek için ikinci yöntem.
       //this.$delete(this.users,index);
     },
     removeUserId(id) {
@@ -74,9 +69,11 @@ const userApp = new Vue({
       }
     },
     userFind(id) {
-      debugger;
-      $('#newUserModal').modal("show");
-      this.activeUser = this.users.find((user) => user.id == id);
+      var foundUser = this.users.find((user) => user.id == id);
+      if (foundUser != null) {
+        $("#newUserModal").modal("show");
+        this.activeUser = foundUser;
+      }
     },
   },
 });
