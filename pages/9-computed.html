@@ -20,6 +20,25 @@
       <p>{{ firstAndLastNameSetter }}</p>
       <input v-model="productPrice" class="form-control" />
       <p>{{ productKdvPrice }}</p>
+      <hr />
+      <p>{{ firstAndLastNameSetter }}</p>
+      <p>{{ firstAndLastNameSetter }}</p>
+      <p>{{ firstAndLastNameSetter }}</p>
+      <hr />
+      <p>{{ firstAndLastNameMetot() }}</p>
+      <p>{{ firstAndLastNameMetot() }}</p>
+      <p>{{ firstAndLastNameMetot() }}</p>
+      <hr>
+      <ul>
+        <!-- Metot -->
+        <li v-for="user in UsersStartingWithCMetot()">
+          {{ user }}
+        </li>
+        <!-- Property -->
+        <li v-for="user in UsersStartingWithC">
+          {{ user }}
+        </li>
+      </ul>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -33,6 +52,14 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
+      /*
+        Methods ve Computed arasındaki fark  ;
+        Computed aynı değerleri tekrar tekrar çalıştırmaz.Yani cache'de tutarken metotlar aynı değerler olmasına
+        rağmen tekrar tekrar çalıştırır.Cache mantığı yoktur.
+
+        Computed ve Metot yardımıyla var olan listeyi filtreleyerek gösterebiliriz.
+      */
+
       const app = new Vue({
         el: "#app",
         name: "Remote Course",
@@ -40,6 +67,17 @@
           firstName: "Mesut",
           lastName: "Solak",
           productPrice: 12,
+          users: ["Mesut", "Mahmut", "Cihat"],
+        },
+        methods: {
+          firstAndLastNameMetot() {
+            console.log("Metot çalıştı");
+            return this.firstName + " " + this.lastName;
+          },
+          //Metot
+          UsersStartingWithMetot() {
+            return this.users.filter((user) => user.startsWith("C"));
+          },
         },
         computed: {
           firstAndLastName() {
@@ -51,6 +89,7 @@
           //Console üzerinden app.firstAndLastNameSetter = "Cihat Solak" yazarak değer set edebilirsin.
           firstAndLastNameSetter: {
             get: function () {
+              console.log("Computed çalıştı");
               return this.firstName + " " + this.lastName;
             },
             set: function (value) {
@@ -58,6 +97,10 @@
               this.firstName = parts[0];
               this.lastName = parts[1];
             },
+          },
+          //Computed
+          UsersStartingWithC() {
+            return this.users.filter((user) => user.startsWith("C"));
           },
         },
       });
