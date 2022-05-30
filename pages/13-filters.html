@@ -15,10 +15,34 @@
   </head>
   <body>
     <div id="app">
-        <p>{{ title | allTextUpperCase }}</p>
-        <p>{{ title | allTextLowerCase }}</p>
-        <p>{{ title | firstLetterUpperCase }}</p>
-        <p>{{ title | firstLettersUpperCase }}</p>
+      <!-- 
+           Local filtreler sadece tanımlandıkları değer içerisinde kullanılırlar. 
+           Yaptığımız filtrelerin her yerde kullanılması için global olarak tanımlamamız gerekir.
+           İki filtreyi aynı anda kullanmak için | | olarak kullanabiliriz.
+           | filtre yazmak için kullanılır.       
+        -->
+      <p>{{ title | allTextUpperCase }}</p>
+      <p>{{ title | allTextLowerCase }}</p>
+      <p>{{ title | firstLetterUpperCase }}</p>
+      <p>{{ title | firstLettersUpperCase }}</p>
+      <p>{{ title | reverseWrite }}</p>
+      <p>{{ title | truncate(8) }}</p>
+      <p>{{ title | reverseWrite | truncate(8) }}</p>
+      <p :title="title | allTextLowerCase">Küçük harf filtresi</p>
+      <p :title="title | reverseWrite">Tersten yaz filtresi</p>
+      <hr />
+
+      <!--
+             Vue js içerisnide kendi oluşturmuş olduğu filtreleride kullanabiliriz ;
+             - trim
+             - num 
+        -->
+
+      <input type="text" v-model.trim="title" class="form-control" />
+      <pre class="alert alert-info">{{ title }}</pre>
+      <hr />
+      <input type="text" v-model.number="sayi" class="form-control" />
+      <pre class="alert alert-info">{{ sayi + sayi }}</pre>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -32,11 +56,24 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
+      Vue.filter("reverseWrite", function (value) {
+        return value.toString().split(" ").reverse().join();
+      });
+
+      Vue.filter("truncate", function (value, length) {
+        if (value.length < length) {
+          return value;
+        }
+        length = length - 3;
+        return value.substring(0, length) + " ... ";
+      });
+
       const app = new Vue({
         el: "#app",
         name: "Remote Course",
         data: {
           title: "lorem ipsum dolor sit amet",
+          sayi: 10,
         },
         filters: {
           allTextUpperCase(value) {
