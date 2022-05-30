@@ -1,80 +1,99 @@
 const app = new Vue({
   el: "#app",
-  name: "Uzaktan Kurs",
+  name: "Remote Course",
   data: {
-    dataItem: { Title: "", Status: false },
-    dataList: [
-      { Id: 1, Title: "ders notlarını hazırla", Status: true, List: "İş" },
-      { Id: 2, Title: "introl videosunu hazırla", Status: false, List: "İş" },
-      { Id: 3, Title: "kahve al", Status: false, List: "Genel" },
+    taskAddItem: {
+      text: "",
+      status: false,
+    },
+    categoryAddItem: {},
+    taskItemList: [
+      { id: 1, text: "Ders notlarını hazırla", status: true, categoryItemId: 2 },
+      {
+        id: 2,
+        text: "İntrol videosunu hazırla",
+        status: false,
+        categoryItemId: 2,
+      },
+      { id: 3, text: "Kahve al", status: false, categoryItemId: 1 },
+      { id: 4, text: "Meyve suyu al", status: false, categoryItemId: 3 },
     ],
-    listItems: [
-      { Id: 1, Title: "Genel" },
-      { Id: 2, Title: "İş" },
-      { Id: 3, Title: "Özel" },
+    categoryItemList: [
+      { id: 1, title: "Genel" },
+      { id: 2, title: "İş" },
+      { id: 3, title: "Özel" },
     ],
-    activeListItem: {},
-    filteredDataList: [],
-    newListItem: {},
+    selectedcategoryItem: { id: 0, title: "" },
+    filteredTaskItemList: [],
   },
   created() {
-    const defaultListItem = this.listItems[0];
-    if (defaultListItem != null) {
-      this.changeListItem(defaultListItem.Id);
+    const defaultCategoryItem = this.categoryItemList[0];
+    if (defaultCategoryItem != null) {
+      this.changeCategoryItem(defaultCategoryItem.id);
     }
   },
   methods: {
-    toggleTodoListStatus(index) {
-      this.todoList[index].Status = !this.todoList[index].Status;
+    toggleNotCompletedTaskListStatus(index) {
+      this.notCompletedTaskList[index].status =
+        !this.notCompletedTaskList[index].status;
     },
-    toggleTodoListFinishedStatus(index) {
-      this.todoListFinished[index].Status =
-        !this.todoListFinished[index].Status;
+    toggleCompletedTaskListStatus(index) {
+      this.completedTaskList[index].status = !this.completedTaskList[index].status;
     },
-    saveItem() {
-      if (this.dataItem.Title !== "") {
-        this.dataItem.Id = this.dataList.length + 1;
-        this.dataItem.List = this.activeListItem.Title;
-        this.dataList.push(this.dataItem);
-        this.clearForm();
-        this.changeListItem(this.activeListItem.Id);
+    saveTaskItem() {
+      if (this.taskAddItem.text !== "") {
+        this.taskAddItem.id = this.taskItemList.length + 1;
+        this.taskAddItem.categoryItemId = this.selectedCategoryItem.id;
+        this.taskItemList.push(this.taskAddItem);
+        this.taskAddItemClear();
+        this.changeCategoryItem(this.selectedCategoryItem.id);
       }
     },
-    clearForm() {
-      this.dataItem = { Title: "", Status: false };
+    taskAddItemClear() {
+      this.taskAddItem = { text: "", status: false };
     },
-    deleteItem(id) {
-      this.dataList = this.dataList.filter((todo) => todo.Id !== id);
-    },
-    changeListItem(id) {
-      const foundListItem = this.listItems.find(
-        (listItem) => listItem.Id === id
+    taskDeleteItem(selectedTaskItem) {
+      this.taskItemList = this.taskItemList.filter(
+        (taskItem) => taskItem.id != selectedTaskItem.id
       );
-      if (foundListItem != null) {
-        this.activeListItem = foundListItem;
-        this.filteredDataList = this.dataList.filter(
-          (data) => data.List === foundListItem.Title
+      this.filteredTaskItemList = this.filteredTaskItemList.filter(
+        (filteredTaskItem) => filteredTaskItem.id != selectedTaskItem.id
+      );
+    },
+    changeCategoryItem(categoryId) {
+      const foundCategoryItem = this.categoryItemList.find(
+        (categoryItem) => categoryItem.id === categoryId
+      );
+      if (foundCategoryItem != null) {
+        this.selectedCategoryItem = foundCategoryItem;
+        this.filteredTaskItemList = this.taskItemList.filter(
+          (taskItem) => taskItem.categoryItemId === foundCategoryItem.id
         );
       }
     },
-    listItemSave() {
-      if (this.newListItem.Title != null) {
-        this.newListItem.Id = this.listItems.length + 1;
-        this.listItems.push(this.newListItem);
-        this.newListItem = {};
+    saveCategoryItem() {
+      if (this.categoryAddItem.title != null) {
+        this.categoryAddItem.id = this.categoryItemList.length + 1;
+        this.categoryItemList.push(this.categoryAddItem);
+        this.categoryAddItem = {};
       }
     },
-    listItemCount(title) {
-      return this.dataList.filter((dataListItem) => dataListItem.List === title)
-        .length;
+    categoryItemListCount(categoryId) {
+      return this.taskItemList.filter(
+        (taskItem) => taskItem.categoryItemId === categoryId
+      ).length;
     },
   },
   computed: {
-    todoList() {
-      return this.filteredDataList.filter((todo) => !todo.Status);
+    notCompletedTaskList() {
+      return this.filteredTaskItemList.filter(
+        (filteredTaskItem) => !filteredTaskItem.status
+      );
     },
-    todoListFinished() {
-      return this.filteredDataList.filter((todo) => todo.Status);
+    completedTaskList() {
+      return this.filteredTaskItemList.filter(
+        (filteredTaskItem) => filteredTaskItem.status
+      );
     },
   },
 });
