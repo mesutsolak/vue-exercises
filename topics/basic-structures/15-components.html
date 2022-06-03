@@ -36,18 +36,20 @@
         Uygulama içerisinde farklı yerlerde kullanılmak için kullanılan özel bileşenlere komponent denir.
         Komponentler local ve global olarak tanımlanabilir.Büyük projelerde kurulan mimarilerde tutulan verilerin
         miktarı önemli olduğu için her şeyin global olarak tanımlanması gereksiz yere yer kapladığı için uygun olmayacaktır.
-        Performans sorunu oluşabilir.
+        Performans sorunu oluşturabilir.
 
-        Template içerisinde yazılan string bir tane html etiketi içermelidir.
-        Pascal case olarak yazılsa bile html içerisinde kebap case olarak çağrılması gerekmektedir.
-        Component içeriği : data , template , methods
+        <template> elementi içerisinde yazılan ifadelerde 1'den fazla eleman varsa kapsayan bir tane html etiketi içermelidir.(div,span)
+        İmport olarak eklenmeyen / global olarak eklenen komponentler Pascal case olarak yazılsa bile html içerisinde kebap case olarak çağrılması gerekmektedir.
+        Sayfa içeriisnde tanımlanan komponent içeriği : data , template , methods
 
-        Component aynı olsa bile farklı yerlerde eklediğin için farklı sonuçlar verecektir. 
+        Komponent aynı olsa bile farklı yerlerde eklediğin için farklı sonuçlar verecektir.İlk eklediğin
+        Komponent değerinden başlamayacaktır. 
 
-        Global olarak tanımlanan componentler direk olarak html içerisine bind olurken 
-        local olarak tanımlanan componentler ilk olarak değişkende tutulup daha sonrasında
-        html olarak kullanılması için components attributenden yararlanılır.
+        Global olarak tanımlanan komponentler direk olarak html içerisine bind olurken 
+        local olarak tanımlanan komponentler ilk olarak değişkende tutulup daha sonrasında
+        html olarak kullanılması için komponentler: attributenden yararlanılır.
 
+        Komponentlerin farklı dosyada tanımlanmasına  single file component denmektedir.
       */
 
       Vue.component("AlertHello", {
