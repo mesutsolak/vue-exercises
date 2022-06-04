@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Children Parent | Vue</title>
+    <title>Children Parent Emit | Vue</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -39,23 +39,36 @@
         template: `
                 <div class="card text-white bg-secondary mb-3">
                     <div class="card-header">Parent</div>
-                      <div class="card-body">
-                      Parent Message: {{ parentMessage }}
-                      <hr>
-                      <child></child>
-                   </div>
-               </div>
+                    <div class="card-body">
+                        Parent Message: {{ parentMessage }}
+                        <hr>
+                        <child @onChange="childChanged"></child>
+                    </div>
+                </div>
           `,
         data() {
           return {
             parentMessage: "",
           };
         },
+        methods: {
+          childChanged(msg) {
+            this.parentMessage = mgs;
+          },
+        },
       });
 
       Vue.component("Child", {
         template: `
-              
+        <div class="card text-white bg-success mb-3">
+    <div class="card-header">Child</div>
+    <div class="card-body"> Child Message: {{ childMessage }}
+      <div class="form-inline">
+        <input v-model="childMessage" class="form-control">
+        <button @click="changeParentMessage" class="btn btn-warning"> Change Parent Message </button>
+      </div>
+    </div>
+  </div>
           `,
         data() {
           return {
@@ -70,9 +83,14 @@
             */
             this.$parent.$data.parentMessage = this.childMessage;
           },
+          changeParentMessage2() {
+            //Bir bileşene olay tanımlaması yapmak için kullanırız.Emit yardımıyla change isminde olay oluşturduk.
+            // Event Delegate mantığına benzemektedir.
+            this.$emit("onChange", this.childMessage);
+          },
         },
       });
-
+ 
       const app = new Vue({
         el: "#app",
         name: "Remote Course",
