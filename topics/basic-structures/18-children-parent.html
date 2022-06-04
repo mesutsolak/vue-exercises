@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instance | Vue</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-icon" href="../../images/icons/vue.ico" />
+  </head>
+  <body>
+      <!-- 
+        app.$children[0].$data.parentMessage = 'Cem'
+        app.$children[0].$children
+        app.$children[0].$chilren[0].$data.childMessage = "123"
+       -->
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+      Vue.component("Parent", {
+        template: `
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">Parent</div>
+                    <div class="card-body">
+Parent Message: {{ parentMessage }}
+<hr>
+<child></child>
+                        </div>
+                    </div>
+          `,
+        data() {
+          return {
+            parentMessage: "",
+          };
+        },
+      });
+
+      Vue.component("Child", {
+        template: `
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Child</div>
+                    <div class="card-body">
+Child Message: {{ childMessage }}
+<div class="form-inline">
+<input v-model="childMessage" class="form-control">
+<button @click="changeParentMessage" class="btn btn-warning">
+    Change Parent Message
+    </button>
+    </div>
+                        </div>
+                    </div>
+          `,
+        data() {
+          return {
+            childMessage: "",
+          };
+        },
+        methods: {
+          changeParentMessage() {
+            /*
+            Bu child komponenti nerde kullandıysam $parent sayesinde bir üst komponente erişebiliriz.
+            $data diyerek parentın içindeki tüm verileri alır.    
+            */
+            this.$parent.$data.parentMessage = this.childMessage;
+          },
+        },
+      });
+
+      const app = new Vue({
+        el: "#app",
+        name: "Remote Course",
+        data: {
+          mesaj: "Hello World",
+        },
+      });
+    </script>
+  </body>
+</html>
