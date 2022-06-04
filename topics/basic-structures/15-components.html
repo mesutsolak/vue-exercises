@@ -19,6 +19,18 @@
       <alert-hello></alert-hello>
       <alert-hello></alert-hello>
       <alert-hello2></alert-hello2>
+      <course-progress inline-template>
+        <div>
+          <div class="progress">
+            <div class="progress-bar" :style="{ width : degree + '%'}">
+              {{ degree }}
+            </div>
+          </div>
+        </p>
+          <button @click="degree += 5" class="btn btn-primary">Increment</button>
+          <button @click="degree -= 5" class="btn btn-primary">Decrement</button>
+        </div>
+      </course-progress>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -49,8 +61,18 @@
         local olarak tanımlanan komponentler ilk olarak değişkende tutulup daha sonrasında
         html olarak kullanılması için komponentler: attributenden yararlanılır.
 
-        Komponentlerin farklı dosyada tanımlanmasına  single file component denmektedir.
+        Komponentlerin farklı dosyada tanımlanmasına single file component denmektedir.
+
+        Bazı komponentleri inline-template olarak da tanımlayabiliriz.
       */
+
+      Vue.component("CourseProgress", {
+        data() {
+          return {
+            degree: 75,
+          };
+        },
+      });
 
       Vue.component("AlertHello", {
         data() {
@@ -84,9 +106,9 @@
         data: {
           mesaj: "Hello World",
         },
-        components : {
-            'alert-hello2' : AlertCount2
-        }
+        components: {
+          "alert-hello2": AlertCount2,
+        },
       });
     </script>
   </body>
