@@ -44,8 +44,8 @@
                    linkte aktif görünecektir. Çünkü /profile linki / ifadesi içeriyor. exact 
                    yazdığımızda içeriyor mu diye bakmak yerine eşit mi diye kontrol eder.
                 -->
-                <router-link to="/" active-class="active" class="nav-link"
-                exact>Ana Sayfa</router-link
+                <router-link to="/" active-class="active" class="nav-link" exact
+                  >Ana Sayfa</router-link
                 >
               </li>
               <li class="nav-item">
@@ -113,11 +113,39 @@
       };
 
       const pageProducts = {
-        template: "<h1>Ürünler</h1>",
+        template: `
+        <div>
+            <h1>Ürünler</h1>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Ürün 1 </h5>
+                    <p class="card-text">Açıklama</p>
+                    <router-link :to="{ name: 'product-detail', params:{ id:1 }}" class="btn btn-primary">Detay</router-link>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Ürün 2 </h5>
+                    <p class="card-text">Açıklama</p>
+                    <router-link :to="{ name: 'product-detail', params:{ id:2 }}" class="btn btn-primary">Detay</router-link>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        `,
+      };
+
+      const pageProductDetails = {
+        template: "<h1>Ürün {{ $route.params.id }}  Detayı</h1>",
       };
 
       const pageCommunication = {
-        template: "<h1>İletişimr</h1>",
+        template: "<h1>İletişim</h1>",
       };
 
       const routers = [
@@ -132,6 +160,12 @@
         {
           path: "/urunler",
           component: pageProducts,
+        },
+        ,
+        {
+          path: "/urunler/detay/:id",
+          component: pageProductDetails,
+          name: "product-detail",
         },
         {
           path: "/iletisim",
