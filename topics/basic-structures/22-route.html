@@ -140,15 +140,32 @@
         `,
       };
 
+      //Aktif route değerlerini $route parametresi sayesinde
       const pageProductDetails = {
-        template: "<h1>Ürün {{ $route.params.id }}  Detayı</h1>",
+        template: `
+        <div>
+          <a href="#" class="btn btn-sm btn-primary float-right" @click="turnBack">Geri Dön</a>
+          <a href="#" class="btn btn-sm btn-primary float-right" @click="backToHome">Anasayfaya Dön</a>
+         <h1>Ürün {{ $route.params.id }}  Detayı</h1>
+         </div>
+        `,
+        methods: {
+          turnBack() {
+            this.$router.go(-1);
+          },
+          backToHome() {
+            this.$router.push("/");
+            //path , name  ve params değerlerine göre sayfa açtırabiliriz.
+            this.$router.push({ name: "product-detail", params: { id: 2 } });
+          },
+        },
       };
 
       const pageCommunication = {
         template: "<h1>İletişim</h1>",
       };
 
-      const routers = [
+      const routes = [
         {
           path: "/",
           component: pageHome,
@@ -174,12 +191,12 @@
       ];
 
       /*
-         Değişken adıyla özellik adını aynı yazarsanız routers : routers yazmana gerek yok.Tek routers yaz.,
-         routers : data
+         Değişken adıyla özellik adını aynı yazarsanız routes : routes yazmana gerek yok.Tek routes yaz.,
+         routes : data
       */
 
       const router = new VueRouter({
-        routers,
+        routes,
       });
 
       const app = new Vue({
