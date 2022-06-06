@@ -3,6 +3,12 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <hello-world msg="Welcome to Your Vue.js App" />
     <alert-count></alert-count>
+    <div id="nav">
+      <router-link to="/">Home | </router-link>
+      <router-link to="/alertcount">AlertCount |</router-link>
+      <router-link to="/photos/1">Photo 1 </router-link>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -20,6 +26,9 @@ export default {
 </script>
 
 <style>
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css");
+
 /*
     Style içerisinde lang diye tabir ettiğimiz özellik stil işlemlerinin derleneceği yapıyı belirtmektedir.
     Örneğin : lang = "scss" yazdığımızda scss derleme özelliğini kullanacağını bilgisini vermiş oluyoruz.
