@@ -119,12 +119,32 @@
     <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script>
       const pageAboutUs = {
-        template: "<h1>Hakkımızda</h1>",
+        template: `
+          <div class="row">
+            <div class="col-9">
+              <h1>Hakkımızda</h1>
+              <router-view></router-view>
+              </div>
+              <div class="col-3">
+                <div class="list-group">
+                  <router-link to="/hakkimizda" class="list-group-item list-group-item-action">Hakkımızda Giriş</router-link>
+                  <router-link :to="{ name: 'about-page1' }" class="list-group-item list-group-item-action">Sayfa 1</router-link>
+                  <router-link :to="{ name: 'about-page2' }" class="list-group-item list-group-item-action">Sayfa 2</router-link>
+                </div>
+              </div>
+          </div>
+        `,
       };
 
       const pageHome = {
         template: "<h1>Hoşgeldiniz</h1>",
       };
+
+      const aboutLogin = {
+        template: `<div class="jumbotron">Hakkımızda</div>`,
+      };
+      const aboutPage1 = { template: `<div class="jumbotron">Sayfa 1</div>` };
+      const aboutPage2 = { template: `<div class="jumbotron">Sayfa 2</div>` };
 
       const pageProducts = {
         template: `
@@ -189,7 +209,21 @@
         {
           path: "/hakkimizda",
           component: pageAboutUs,
-          alias:'/aboutus'
+          alias: "/aboutus",
+          children: [
+            {
+              path: "",
+              component: aboutLogin,
+              name: "about-login",
+            },
+            {
+              path: "giris",
+              component: aboutLogin,
+              name: "about-login",
+            },
+            { path: "page1", component: aboutPage1, name: "about-page1" },
+            { path: "page2", component: aboutPage2, name: "about-page2" },
+          ],
         },
         {
           path: "/urunler",
