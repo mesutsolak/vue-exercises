@@ -193,10 +193,15 @@
       /*
          Değişken adıyla özellik adını aynı yazarsanız routes : routes yazmana gerek yok.Tek routes yaz.,
          routes : data
+         mode: history, hash modlarını kullanabiliriz.
+         History modu live server üzerinde çalışırken kullanılır.Sunucu (localhost) üzerinde çalışması gerekmektedir.
+         History modu test modunda aktif edemeyiz.
+         Hash modu klasör olarak da kullanırız.
       */
 
       const router = new VueRouter({
         routes,
+        mode : 'history' 
       });
 
       const app = new Vue({
