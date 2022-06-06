@@ -63,6 +63,20 @@
                 >
               </li>
               <li class="nav-item">
+                <!-- 
+                    a href'te tanımlanabilir fakat doğru yöntem router-link'tir.
+                   <a class="nav-link active"
+                   href="#/hakkimizda"
+                   aria-current="page">Hakkımızda</a> 
+                -->
+                <router-link
+                  to="/aboutus"
+                  class="nav-link"
+                  active-class="active"
+                  >About Us</router-link
+                >
+              </li>
+              <li class="nav-item">
                 <!-- <a class="nav-link" href="#">Features</a> -->
                 <router-link
                   :to="productsAddress"
@@ -165,14 +179,17 @@
         template: "<h1>İletişim</h1>",
       };
 
+      // redirect içerisinde name vererekte yönlendirme işlemi yapılır.
       const routes = [
         {
           path: "/",
           component: pageHome,
+          redirect: { name: "iletisim" },
         },
         {
           path: "/hakkimizda",
           component: pageAboutUs,
+          alias:'/aboutus'
         },
         {
           path: "/urunler",
@@ -187,6 +204,7 @@
         {
           path: "/iletisim",
           component: pageCommunication,
+          name: "iletisim",
         },
       ];
 
@@ -197,11 +215,14 @@
          History modu live server üzerinde çalışırken kullanılır.Sunucu (localhost) üzerinde çalışması gerekmektedir.
          History modu test modunda aktif edemeyiz.
          Hash modu klasör olarak da kullanırız.
+
+         Redirect : Başka bir sayfaya yönlendirme için kullanılır.
+         Alias ikinci route tanımlaması gibi düşünebiliriz.
       */
 
       const router = new VueRouter({
         routes,
-        mode : 'history' 
+        mode: "history",
       });
 
       const app = new Vue({
