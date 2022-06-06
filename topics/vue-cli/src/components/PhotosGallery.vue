@@ -17,6 +17,10 @@
   Bunun sebebi hash değişimlerini yakalamaması.
   Bunun için watch özelliğinden yararlanmamız gerekmektedir.
   Bir özellik ya da bir değişken değişimi olduğunda methodu tekrar çağırabiliriz.
+
+  Route Navigation Guard (Doküman okunabilir) kullanımı ; bir request geldiği yüklendiğinde ve yüklendikten sonraki
+  adımları içeren yapıya denmektedir.NProgress frameworkünü inceleyebilirsin.
+
 */
 export default {
   data() {
