@@ -25,11 +25,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Anasayfa</a>
+            <li class="nav-item">
+               <router-link to="/" class="nav-link" active-class="active">Ana sayfa</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sefer Ara</a>
+              <router-link to="seferara" class="nav-link" active-class="active">Sefer Ara</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Koltuk Seçimi</a>
@@ -44,13 +44,13 @@
         </div>
       </div>
     </nav>
-    <!-- <router-view /> -->
+    <router-view />
   </div>
 </template>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700,700i&subset=latin-ext");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-@import "~bootstrap/scss/bootstrap";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css");
 
 body {
   font-family: "Segoe UI Light";
