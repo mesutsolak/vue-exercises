@@ -4,7 +4,7 @@
       <div class="container">
         <a class="navbar-brand" href="#">
           <img
-            src="assets/img/bus.png"
+            src="./assets/img/bus.png"
             width="30"
             height="30"
             class="d-inline-block align-top"
@@ -47,18 +47,6 @@
     <!-- <router-view /> -->
   </div>
 </template>
-
-<script>
-
-
-export default {
-  name: "App",
-  components: {
-    
-  },
-};
-</script>
-
 <style>
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700,700i&subset=latin-ext");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
