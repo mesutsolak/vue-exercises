@@ -1,0 +1,150 @@
+{
+  "departurePoints": [
+    {
+      "id": 1,
+      "description": "İstanbul-Otogar"
+    },
+    {
+      "id": 2,
+      "description": "Ankara-Otogar"
+    },
+    {
+      "id": 3,
+      "description": "İzmir-Otogar"
+    },
+    {
+      "id": 4,
+      "description": "Bursa-Otogar"
+    },
+    {
+      "id": 5,
+      "description": "Antalya-Otogar"
+    }
+  ],
+  "expeditions": [
+    {
+      "id": 1,
+      "departurePoint": 2,
+      "arrivalPoint": 1,
+      "departureDate": "2018-08-05 21:00",
+      "ticketPrice": 60
+    },
+    {
+      "id": 2,
+      "departurePoint": 2,
+      "arrivalPoint": 3,
+      "departureDate": "2018-08-05 22:00",
+      "ticketPrice": 65
+    }
+  ],
+  "seats": [
+    {
+      "id": 1,
+      "expeditionId": 1,
+      "number": 1,
+      "type": "Tekli",
+      "location": "Cam Kenarı",
+      "gender": "E",
+      "status": 1
+    },
+    {
+      "id": 2,
+      "expeditionId": 1,
+      "number": 2,
+      "type": "Çiftli",
+      "location": "Koridor",
+      "gender": "K",
+      "status": 1
+    },
+    {
+      "id": 3,
+      "expeditionId": 1,
+      "number": 3,
+      "type": "Çiftli",
+      "location": "Cam Kenarı",
+      "gender": "E",
+      "status": 1
+    },
+    {
+      "id": 4,
+      "expeditionId": 1,
+      "number": 4,
+      "type": "Tekli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 5,
+      "expeditionId": 1,
+      "number": 5,
+      "type": "Çiftli",
+      "location": "Koridor",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 6,
+      "expeditionId": 1,
+      "number": 6,
+      "type": "Çiftli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 7,
+      "expeditionId": 1,
+      "number": 7,
+      "type": "Tekli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 8,
+      "expeditionId": 1,
+      "number": 8,
+      "type": "Çiftli",
+      "location": "Koridor",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 9,
+      "expeditionId": 1,
+      "number": 9,
+      "type": "Çiftli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 10,
+      "expeditionId": 1,
+      "number": 10,
+      "type": "Tekli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 1
+    },
+    {
+      "id": 11,
+      "expeditionId": 1,
+      "number": 11,
+      "type": "Çiftli",
+      "location": "Koridor",
+      "gender": "",
+      "status": 0
+    },
+    {
+      "id": 12,
+      "expeditionId": 1,
+      "number": 12,
+      "type": "Çiftli",
+      "location": "Cam Kenarı",
+      "gender": "",
+      "status": 0
+    }
+  ]
+}

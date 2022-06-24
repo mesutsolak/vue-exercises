@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import SearchForm from "../components/SearchForm.vue";
+import ExpeditionSearch from "../views/ExpeditionSearch.vue";
 
 Vue.use(VueRouter);
 
@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/seferara",
     name: "expeditionSearch",
-    component: SearchForm,
+    component: ExpeditionSearch,
   },
   {
     path: "/about",
