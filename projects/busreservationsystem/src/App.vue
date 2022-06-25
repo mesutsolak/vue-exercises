@@ -26,19 +26,38 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-               <router-link to="/" class="nav-link" active-class="active">Ana sayfa</router-link>
+              <router-link to="/" class="nav-link" active-class="active"
+                >Ana sayfa</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link to="seferara" class="nav-link" active-class="active">Sefer Ara</router-link>
+              <router-link to="/seferara" class="nav-link" active-class="active"
+                >Sefer Ara</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Koltuk Seçimi</a>
+              <router-link
+                to="/koltuksecimi"
+                class="nav-link"
+                active-class="active"
+                >Koltuk Seçimi</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Yolcu Bilgileri</a>
+              <router-link
+                to="/yolcubilgileri"
+                class="nav-link"
+                active-class="active"
+                >Yolcu Bilgileri</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Ödeme Bilgileri</a>
+              <router-link
+                to="/odemebilgileri"
+                class="nav-link"
+                active-class="active"
+                >Ödeme Bilgileri</router-link
+              >
             </li>
           </ul>
         </div>

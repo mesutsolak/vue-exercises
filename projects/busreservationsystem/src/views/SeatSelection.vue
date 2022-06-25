@@ -63,6 +63,7 @@
 
 <script>
 import db from "../assets/db.json";
+import { GlobalData } from "../main";
 
 export default {
   data() {
@@ -71,13 +72,14 @@ export default {
       seats: [],
       foundSeats: [],
       selectedSeats: [],
-      selectedExpeditions: [],
+      selectedExpedition: [],
     };
   },
   created() {
     this.expeditions = db.expeditions;
     this.seats = db.seats;
     this.fetchSeats();
+    // this.selectedSeats = GlobalData?.selectedSeats;
   },
   methods: {
     fetchSeats() {
@@ -85,11 +87,16 @@ export default {
 
       if (this.$route.params.expeditionId) {
         expeditionId = parseInt(this.$route.params.expeditionId);
+      } else if (
+        GlobalData.selectedExpedition != null &&
+        GlobalData.selectedExpedition.id
+      ) {
+        expeditionId = parseInt(GlobalData.selectedExpedition.id);
       } else {
         this.$router.push({ name: "expeditionSearch" });
       }
 
-      this.selectedExpeditions = this.expeditions.find(
+      this.selectedExpedition = this.expeditions.find(
         (x) => x.id == expeditionId
       );
       this.foundSeats = this.seats.filter(
@@ -97,11 +104,9 @@ export default {
       );
     },
     getSeatList(type, location) {
-      var a = this.foundSeats.filter(
+      return this.foundSeats.filter(
         (k) => k.type === type && k.location === location
       );
-      debugger;
-      return a;
     },
     seatSelect(seatId) {
       let seat = this.foundSeats.find((k) => k.id == seatId);
@@ -112,7 +117,11 @@ export default {
         this.selectedSeats.push(seat);
       }
     },
-    enterPassengerInformation() {},
+    enterPassengerInformation() {
+      GlobalData.selectedExpedition = this.selectedExpedition;
+      GlobalData.selectedSeats = this.selectedSeats;
+      this.$router.push({ name: "passengerInformation" });
+    },
   },
 };
 </script>

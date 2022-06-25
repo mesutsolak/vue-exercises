@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import ExpeditionSearch from "../views/ExpeditionSearch.vue";
 import SeatSelection from "../views/SeatSelection.vue";
+import PassengerInformation from "../views/PassengerInformation.vue";
+import PaymentInformation from "../views/PaymentInformation.vue";
 
 Vue.use(VueRouter);
 
@@ -19,9 +21,19 @@ const routes = [
     component: ExpeditionSearch,
   },
   {
+    path: "/yolcubilgileri",
+    name: "passengerInformation",
+    component: PassengerInformation,
+  },
+  {
     path: "/koltuksecimi/:expeditionId?",
     name: "seatSelection",
     component: SeatSelection,
+  },
+  {
+    path: "/odemeBilgileri",
+    name: "paymentInformation",
+    component: PaymentInformation,
   },
   {
     path: "/about",

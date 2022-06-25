@@ -132,7 +132,7 @@ export default {
     expeditionSelect(expeditionId) {
       this.$router.push({
         name: "seatSelection",
-        params: { expeditionId: expeditionId },
+        params: { expeditionId },
       });
     },
   },
