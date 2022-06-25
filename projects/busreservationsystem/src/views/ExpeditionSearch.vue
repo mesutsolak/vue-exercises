@@ -19,7 +19,7 @@
           <label>Varış Noktası</label>
           <select class="form-control" v-model="arrivalPoint">
             <option value="">Seçiniz</option>
-           <option
+            <option
               v-for="departurePoint in departurePoints"
               :key="departurePoint.id"
               :value="departurePoint.id"
@@ -43,7 +43,10 @@
     <div v-if="foundExpeditions.length">
       <h2>Sefer Listesi</h2>
       <table class="table table-striped">
-        <tr v-for="foundExpedition in foundExpeditions" :key="foundExpedition.id">
+        <tr
+          v-for="foundExpedition in foundExpeditions"
+          :key="foundExpedition.id"
+        >
           <td>
             Kalkış Saati
             <h4>{{ getHour(foundExpedition.departureDate) }}</h4>
@@ -53,7 +56,11 @@
             <h4>{{ foundExpedition.ticketPrice }} ₺</h4>
           </td>
           <td>
-            <button type="button" class="btn btn-success" @click="expeditionSelect(foundExpedition.id)">
+            <button
+              type="button"
+              class="btn btn-success"
+              @click="expeditionSelect(foundExpedition.id)"
+            >
               Koltuk Seç
             </button>
           </td>
@@ -122,7 +129,12 @@ export default {
         ("0" + dateHour.getMinutes()).slice(-2);
       return hour;
     },
-    expeditionSelect(expeditionId) {},
+    expeditionSelect(expeditionId) {
+      this.$router.push({
+        name: "seatSelection",
+        params: { expeditionId: expeditionId },
+      });
+    },
   },
 };
 </script>

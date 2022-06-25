@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import ExpeditionSearch from "../views/ExpeditionSearch.vue";
+import SeatSelection from "../views/SeatSelection.vue";
 
 Vue.use(VueRouter);
 
@@ -17,6 +17,11 @@ const routes = [
     path: "/seferara",
     name: "expeditionSearch",
     component: ExpeditionSearch,
+  },
+  {
+    path: "/koltuksecimi/:expeditionId?",
+    name: "seatSelection",
+    component: SeatSelection,
   },
   {
     path: "/about",
