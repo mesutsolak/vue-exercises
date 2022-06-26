@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "title": "Adana Kebap",
+      "category": "Kebaplar",
+      "amount": "24.90",
+      "image": "https://cdn.yemek.com/mncrop/940/625/uploads/2016/05/adana-kebap-one-cikan.jpg"
+    },
+    {
+      "title": "Et Döner",
+      "category": "Dönerler",
+      "amount": "14",
+      "image": "https://bonet.com.tr/dosyalar/2021/6/donerporsiyon-01700.jpg"
+    },
+    {
+      "title": "Izgara Köfte",
+      "category": "Izgaralar",
+      "amount": "18",
+      "image": "https://cdn.yemek.com/mncrop/620/388/uploads/2018/07/lokanta-usulu-izgara-kofte.jpg"
+    }
+  ]
+}

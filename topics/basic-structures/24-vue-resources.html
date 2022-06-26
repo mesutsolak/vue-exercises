@@ -58,6 +58,8 @@
           isLoading:true
         },
         created(){
+            //Daha detaylı bilgi için https://github.com/pagekit/vue-resource
+            
             this.$http.get('https://jsonplaceholder.typicode.com/todos')
             .then(response=>{
                 this.isLoading= false;

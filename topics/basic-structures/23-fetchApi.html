@@ -70,7 +70,6 @@
         created(){
             fetch('https://jsonplaceholder.typicode.com/todos')
             .then((res) => {
-                debugger;
                 return res.json();
             })
             .then((res)=>{
