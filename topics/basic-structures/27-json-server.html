@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Omdbapi | Vue</title>
+    <title>Json Server | Vue</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,10 +15,11 @@
   </head>
   <body>
     <!-- 
+
        Test amaçlı bir api sunucusu oluşturmak için json server pakaetini kurmamız gerekiyor.
        Json-server kurmak için cmd açılır ve ilgili klasör cd ile belirlenir.
        npm install -g json-server kurulur. / -g global'e kur demek.
-       json-server -p 3001 db-products.json / -p port anlamına gelir.3001 bir port numarasıdır.
+       json-server -p 3001 db-products.json / -p port anlamına gelir.3001 bir port numarasıdır. & generate.js
        http://localhost:3001/ -> var olan verileri bölerek gösterir.
 
        Json server üzerinde oluşturduğumuz json dosyalarını kullanabliyorken rastgele değerler
@@ -37,6 +38,13 @@
       Put    -> Veri güncellemek için (Hepsini)
       Patch  -> Veri güncellemek için (Bir kısmını)
       Delete -> Veriyi silmek için
+
+      Patch durumunuysa json içinde bir property göndererek güncelleme işlemi yapmamıza yarar.
+
+      Fake Data Github : https://github.com/fzaninotto/Faker
+
+      Json server üzerinde yapılan değişiklikler kaydedilmektedir yani bir nevi veritabanı görevi
+      görmektedir.
 
      -->
 

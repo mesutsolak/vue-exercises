@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios | Vue</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="../../images/icons/vue.ico" />
+  </head>
+  <body>
+    <!-- 
+        Github üzerinde Axios : https://github.com/axios/axios
+     -->
+
+    <div id="app">
+      <div class="container mt-2">
+        <button
+          class="btn btn-info float-right text-white"
+          ref="addProductModal"
+          data-bs-toggle="modal"
+          data-bs-target="#AddProductModal"
+        >
+          <i class="fa-regular fa-plus"></i>
+          Yeni Ürün
+        </button>
+
+        <div
+          class="modal fade"
+          id="AddProductModal"
+          tabindex="-1"
+          aria-labelledby="AddProductModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <form @submit.prevent="itemSave">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="AddProductModalLabel">
+                    Ürün Kaydı
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="title" class="form-label">Başlık</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      class="form-control"
+                      v-model="formItem.title"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="category" class="form-label">Kategori</label>
+                    <input
+                      id="category"
+                      name="category"
+                      type="text"
+                      class="form-control"
+                      v-model="formItem.category"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Tutar</label>
+                    <input
+                      type="text"
+                      name="amount"
+                      id="amount"
+                      class="form-control"
+                      v-model="formItem.amount"
+                    />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    ref="fileInputClose"
+                  >
+                    Kapat
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk mr-2"></i>
+                    Kaydet
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <h2>Ürünler ({{ list.length }})</h2>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>Id</td>
+              <td>Başlık</td>
+              <td>Resim</td>
+              <td>Kategori</td>
+              <td>Fiyat</td>
+              <td>İşlemler</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="!list.length">
+              <td>Kayıt yok</td>
+            </tr>
+            <tr v-for="(item) in list">
+              <td>{{ item.id }}</td>
+              <td>{{ item.title }}</td>
+              <td><img :src="item.image" style="height: 120px" /></td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.amount }}</td>
+              <td>
+                <i
+                  class="fa-solid fa-pencil text-success"
+                  @click="itemEdit(item.id)"
+                ></i>
+                <i
+                  class="fa-solid fa-trash text-danger"
+                  @click="itemDelete(item.id)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        name: "Remote Course",
+        data: {
+          list: [],
+          formItem: { id: -1, image: "" },
+        },
+        created() {
+          this.getProducts();
+        },
+        methods: {
+          getProducts() {
+            axios
+              .get("http://localhost:3001/products")
+              .then((res) => {
+                this.list = res.data;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          },
+          itemSave() {
+            debugger;
+            if (this.formItem.id > -1) {
+              axios
+                .put(
+                  "http://localhost:3001/products/" + this.formItem.id,
+                  this.formItem
+                )
+                .then((res) => {
+                  Swal.fire("Ürün", "Güncellendi!", "success");
+                  this.getProducts();
+                  this.formItem = {
+                    id: 0,
+                    image: "http://placeimg.com/320/240/technics",
+                  };
+                  this.$refs.fileInputClose.click();
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              axios
+                .post("http://localhost:3001/products", this.formItem)
+                .then((res) => {
+                  Swal.fire("Ürün", "Kaydedildi!", "success");
+                  this.getProducts();
+                  this.formItem = {
+                    id: 0,
+                    image: "http://placeimg.com/320/240/technics",
+                  };
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          },
+          itemEdit(id) {
+            axios
+              .get("http://localhost:3001/products/" + id)
+              .then((res) => {
+                this.formItem = res.data;
+                this.$refs.addProductModal.click();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+          itemDelete(id) {
+            Swal.fire({
+              title: "Emin misiniz ?",
+              icon: "question",
+              text: "Silmek istediğinize emin misiniz ?",
+              type: "question",
+              showCancelButton: true,
+              cancelButtonText: "İptal",
+              confirmButtonText: "Sil",
+            }).then((result) => {
+              if (result.value) {
+                axios
+                  .delete("http://localhost:3001/products/" + id)
+                  .then((res) => {
+                    Swal.fire("Ürün", "Silindi!", "success");
+                    this.getProducts();
+                  });
+              }
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
