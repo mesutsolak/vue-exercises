@@ -18,5 +18,15 @@
       "amount": "18",
       "image": "https://cdn.yemek.com/mncrop/620/388/uploads/2018/07/lokanta-usulu-izgara-kofte.jpg"
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Yazılım"
+    },
+    {
+      "id": 2,
+      "title": "Web Programlama"
+    }
   ]
 }

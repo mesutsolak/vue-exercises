@@ -62,7 +62,7 @@
           isLoading: true,
         },
         created() {
-          //CQRS hatası vermektedir.
+          //CQRS hatası vermektedir.Localde yani harici olarak kullanıldı.
           fetch("../../jsons/db-products.json")
             .then((res) => {
               return res.json();
