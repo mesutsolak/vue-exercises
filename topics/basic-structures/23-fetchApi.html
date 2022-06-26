@@ -16,16 +16,18 @@
   <body>
     <div id="app">
         <!-- 
-            Jquery içindeki ajax komutlarını kullanabiliriz.
-            Ayrıyeten fetch api'de kullanabiliriz.
-            Bunların yanıa sıra farklı frameworklerde kullanabiliriz.
+            Jquery içindeki ajax komutlarını , fetch api , axios gibi yardımcı elemanları veri çekmek için kullanabiliriz.
+            Ajax : Jquery içinde tanımlanan komutları kullanarak isteklerimizi gerçekleştirebiliriz.
+            Fetch : Javascript ile beraber fetch api kullanabiliriz.Fetch api kullanmak için Jquery 
+            gibi frameworklere ihtiyacımız yoktur.
 
-            Javascript ile beraber fetch api kullanabiliriz.
-            jsonplaceholder.typicode.com ile internet üzerinde harici veriler alabiliriz.
+            Fetch API hakkında detaylı bilgi için : https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-            Daha detaylı bilgi almak için ; https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
+            Server Side'da kullandığımız mock ve fake data gibi yapılarıda kullanabiliriz.JsonPlaceHolder yapısı
+            bunlara benzemektedir.
+            JsonPlaceHolder : jsonplaceholder.typicode.com ile internet üzerinde harici veriler elde edebiliriz.
          -->
+
       <h2>Yapılacak Listesi ({{list.length}} kayıt)</h2>
       <hr />
       <div v-if="isLoading">Yükleniyor...</div>
