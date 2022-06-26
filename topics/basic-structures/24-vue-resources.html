@@ -15,17 +15,6 @@
   </head>
   <body>
     <div id="app">
-        <!-- 
-            Jquery içindeki ajax komutlarını kullanabiliriz.
-            Ayrıyeten fetch api'de kullanabiliriz.
-            Bunların yanıa sıra farklı frameworklerde kullanabiliriz.
-
-            Javascript ile beraber fetch api kullanabiliriz.
-            jsonplaceholder.typicode.com ile internet üzerinde harici veriler alabiliriz.
-
-            Daha detaylı bilgi almak için ; https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
-         -->
       <h2>Yapılacak Listesi ({{list.length}} kayıt)</h2>
       <hr />
       <div v-if="isLoading">Yükleniyor...</div>
@@ -59,6 +48,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
     <script>
       const app = new Vue({
         el: "#app",
@@ -68,14 +58,12 @@
           isLoading:true
         },
         created(){
-            fetch('https://jsonplaceholder.typicode.com/todos')
-            .then((res) => {
-                debugger;
-                return res.json();
-            })
-            .then((res)=>{
-                this.isLoading = false;
-                this.list = res;
+            this.$http.get('https://jsonplaceholder.typicode.com/todos')
+            .then(response=>{
+                this.isLoading= false;
+                this.list = response.body;
+            },response =>{
+                alert("Hata");
             });
         }
       });
