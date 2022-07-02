@@ -8,7 +8,9 @@ export default new Vuex.Store({
     activeUser: {
       firstName: "Mesut",
       lastName: "Solak",
+      Title: "Yazılım Geliştirme Uzmanı",
       likeNumber: 25,
+      profilImage: "profile-mesut.jpg",
     },
   },
   getters: {

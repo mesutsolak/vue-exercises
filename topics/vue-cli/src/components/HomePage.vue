@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     plusNumber: function () {
-      this.$store.state.count += 1; 
+      this.$store.state.count += 1;
     },
   },
 };
