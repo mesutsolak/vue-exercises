@@ -4,6 +4,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 import AlertCount from "./components/AlertCount.vue";
 import NotFound from "./components/NotFound.vue";
 import Photos from "./components/PhotosGallery.vue";
+import MesutPage from "./components/MesutPage.vue";
 
 import NProgress from "nprogress";
 
@@ -15,6 +16,11 @@ const router = new Router({
       path: "/",
       name: "helloWorld",
       component: HelloWorld,
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: MesutPage,
     },
     {
       path: "/alertcount",

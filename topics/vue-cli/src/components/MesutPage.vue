@@ -1,0 +1,13 @@
+<template>
+  <div id="app">Sayı : {{ count }}</div>
+</template>
+
+<script>
+export default {
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+  },
+};
+</script>

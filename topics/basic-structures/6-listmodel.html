@@ -36,6 +36,11 @@
           <th>isim</th>
           <th>rol</th>
         </tr>
+        <!-- 
+          Item içerisindeki parametre sayısı azsa v-for="{id,name,email} in users" olarak yazabiliriz. 
+          v-if="users" dediğimiz zaman users veri içeriyorsa göster mantığıyla çalışmaktadır.
+          Undefined ya da null değer içeriyorsa gösterme demektedir. 
+        -->
         <tr v-for="(user,index) in users">
           <td>{{ index }}</td>
           <td>{{ user.id }}</td>
