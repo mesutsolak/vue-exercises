@@ -4,7 +4,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 import AlertCount from "./components/AlertCount.vue";
 import NotFound from "./components/NotFound.vue";
 import Photos from "./components/PhotosGallery.vue";
-import MesutPage from "./components/MesutPage.vue";
+import HomePage from "./components/HomePage.vue";
 
 import NProgress from "nprogress";
 
@@ -20,7 +20,7 @@ const router = new Router({
     {
       path: "/home",
       name: "home",
-      component: MesutPage,
+      component: HomePage,
     },
     {
       path: "/alertcount",

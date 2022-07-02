@@ -3,11 +3,20 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   state: {
-    count: 0,
+    activeUser: {
+      firstName: "Mesut",
+      lastName: "Solak",
+      likeNumber: 25,
+    },
   },
-  getters: {},
+  getters: {
+    //Var olan state (veri) özelleştirerek tekrardan veri şeklinde kullanmamıza yaramaktadır.
+    firstAndLastName: (state) =>
+      state.activeUser.firstName + " " + state.activeUser.lastName,
+    ispopular: (state) => state.activeUser.likeNumber > 20,
+  },
   mutations: {},
   actions: {},
 });
