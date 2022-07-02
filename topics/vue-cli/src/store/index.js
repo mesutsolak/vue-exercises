@@ -43,5 +43,25 @@ export default new Vuex.Store({
       state.activeUser.likeNumber += payload.value;
     },
   },
-  actions: {},
+  actions: {
+    // Parametre olarak context değerini almaktadır.
+    UserSetting(context) {
+      context.commit("UserSetting");
+    },
+    // context içindeki commit değerine direk olarak ulaşabiliriz.State değerinide alabilmekteyiz.
+    // Commitler mutations metotları çağırmaktadır.Mutation tek işlem yapabilirken actionlar asenkron çalıştığı için birden fazla işlem yapabilmektedir.
+    increaseLikes: ({ commit }, payload) => commit("imcreaseLikes", payload),
+    decreaseLikes: ({ commit, state }) => {
+      if (state.activeUser.likeNumber > 0) commit("decreaseLikes");
+    },
+    increaseLikesAsync: ({ commit }, payload) => {
+      //resolve,reject parametrelerini almaktadır.
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          commit("imcreaseLikes", payload);
+          resolve(); // çağırma işlemi yaptıktan sonra tamamlanınca .then() içine yazdığımız kodlar çalışır.
+        }, 3000);
+      });
+    },
+  },
 });

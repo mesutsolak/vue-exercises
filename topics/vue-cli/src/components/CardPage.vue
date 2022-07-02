@@ -14,6 +14,7 @@
     <hr>
     <button @click="UserSettings" class="btn btn-primary mr-2">Kullanıcı Ayarla</button>
     <button @click="increaseLikes" class="btn btn-success mr-1">Beğeni Arttır</button>
+    <button @click="increaseLikesAsync" class="btn btn-success mr-1">Beğeni Arttır (Async)</button>
     <button @click="decreaseLikes" class="btn btn-danger">Beğeni Azalt</button>
 
   </div>
@@ -74,15 +75,22 @@ return null;
     },
     methods:{
         userSetting(){
-            this.$store.commit('userSetting');
+            // this.$store.commit('userSetting');
+            this.$store.dispatch('userSetting').then(()=>{});
         },
         increaseLikes(){
-            this.$store.commit('increaseLikes',5);
+            // this.$store.commit('increaseLikes',5);
+            this.$store.dispatch('increaseLikes', {value : 5 });
         },
         decreaseLikes(){
             //obje gönderebiliriz
-            this.$store.commit('decreaseLikes',{ value : 1 });
-        }
+            // this.$store.commit('decreaseLikes',{ value : 1 });
+              this.$store.dispatch('decreaseLikes');
+        },
+         increaseLikesAsync(){
+            // this.$store.commit('increaseLikes',5);
+            this.$store.dispatch('increaseLikesAsync', {value : 1 });
+        },
     }
 };
 </script>
