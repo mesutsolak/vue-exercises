@@ -8,6 +8,7 @@ Vue.use(Vuex);
   parçalayıp modüller altına toplamamız hem daha düzgün hem de yönetimi daha kolay olacaktır.
   view ->  {{ $store.state.userModule.activeUser.Title }}
   kod -> return this.$store.state.userModule.activeUser.Title;
+  Doküman : https://vuex.vuejs.org/guide/modules.html
 */
 
 
