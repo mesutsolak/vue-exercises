@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/animate.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../../images/icons/vue.ico" />
     <style>
       /* Fade özelliğini kullanarak ekran geçişlerini ayarlıyoruz.
@@ -40,7 +41,17 @@
         Resim olarakda bulabiliriz.
         transition özelliği kullanarak animasyon yaptık.Animasyon yapmak için bir diğer özellikse
         animation özelliğidir.
+
+        Ease / cubic-bezier gibi yapılar animasyonun tipini belli etmektedir.
+
+        Animasyonları manuel oluşturmak yerine hazır bir framework oluşturarakta kullanabiliriz. (animate.css)
+
+        https://animate.style/ -> Sağ tarafındaki keywordlerle 
+
       */
+      .animate2-appear {
+        opacity: 0;
+      }
       .custom-enter-active {
         transition: all 0.5s ease;
       }
@@ -88,6 +99,7 @@
           Fade Animasyonu
         </div>
       </transition>
+
       <button
         class="btn btn-primary"
         @click="isCustomShowing = !isCustomShowing"
@@ -102,8 +114,75 @@
       </transition>
 
       <transition name="bounce">
-        <div class="alert alert-success" v-if="isCustomShowing">Özel Animasyon</div>
+        <div class="alert alert-success" v-if="isCustomShowing">
+          Özel Animasyon
+        </div>
       </transition>
+
+      <hr />
+
+      <transition
+        name="custom-animate"
+        enter-active-class="animated tada"
+        leave-active-class="animated bounceOutRight"
+      >
+        <div class="alert alert-success" v-if="isCustomShowing">
+          Özel Animasyon 2
+        </div>
+      </transition>
+
+      <!-- appear keywordü sayfa ilk açıldığında animasyonu çalıştırır -->
+      <transition
+        name="custom-animate2"
+        appear
+        appear-class="animate2-appear"
+        appear-active-class="animated tada"
+      >
+        <div class="alert alert-success">Özel Animasyon 3</div>
+      </transition>
+
+      <!-- Elemanlar arası geçiş (1) -->
+
+      <transition name="custom">
+        <div class="alert alert-success" v-if="isCustomShowing">Kutu 1</div>
+        <p class="alert alert-success" v-else>Kutu 2</p>
+      </transition>
+
+      <!-- Farklı elemanlarda key tanımlaması yapmana gerek yok fakat aynı elemanlarda var. (2) -->
+
+      <transition name="custom">
+        <div class="alert alert-success" key="k3" v-if="isCustomShowing">
+          Kutu 3
+        </div>
+        <div class="alert alert-success" key="k4" v-else>Kutu 4</div>
+      </transition>
+
+      <!-- Farklı elemanlarda key tanımlaması yapmanın diğer yolu ise :key ile bind etmektir. (3) -->
+
+      <transition name="custom">
+        <div :key="isCustomShowing">
+          <div class="alert alert-success" v-if="isCustomShowing">Kutu 5</div>
+          <div class="alert alert-success" v-else>Kutu 6</div>
+        </div>
+      </transition>
+
+      <button class="btn btn-primary" @click="reload">Yükle</button>
+
+      <!-- 
+        2 tür transition mode bulunmaktadır;
+        in-out -> default olarak gelmektedir.Tanımlasak bile fark edilmez.
+        İlkden ikinci elemanı gösterip aktif elemanı gizlemektedir.
+        out-in -> önce aktif elemana çıkış efekti uygulanır ve daha önce geçiş yapılacak
+        elemana giriş efekti uygulanıyor.
+       -->
+
+      <transition name="custom">
+        <div :key="loading">
+          <div class="alert alert-success" v-if="loading">Yükleniyor...</div>
+          <div class="alert alert-success" v-else>Yüklendi</div>
+        </div>
+      </transition>
+      
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -124,6 +203,17 @@
         data: {
           isFadeShowing: false,
           isCustomShowing: false,
+          loading: false,
+        },
+        methods: {
+          //api isteklerinde kullanabiliriz.
+          reload() {
+            this.loading = true;
+            setTimeout(() => {
+              this.loading = false;
+              //
+            }, 5000);
+          },
         },
       });
     </script>
