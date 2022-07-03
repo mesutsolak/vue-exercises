@@ -91,6 +91,14 @@ return null;
             // this.$store.commit('increaseLikes',5);
             this.$store.dispatch('increaseLikesAsync', {value : 1 });
         },
+        ...mapActions([
+            'UserSetting','increaseLikes'
+            ])
+            /*
+            Payload almayan metotları getterslar için nasıl mapGetters kullanıyorsak 
+            actionlar için de mapActions kullanabiliriz.Payload alan actionları
+            yine eski şekilde yazmaya devam etmeliyiz.
+            */
     }
 };
 </script>
