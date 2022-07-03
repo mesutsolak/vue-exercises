@@ -38,6 +38,8 @@
         [(v-enter -> v-enter-to) v-enter-active] & [(v-leave -> v-leave-top) v-leave-active]
 
         Resim olarakda bulabiliriz.
+        transition özelliği kullanarak animasyon yaptık.Animasyon yapmak için bir diğer özellikse
+        animation özelliğidir.
       */
       .custom-enter-active {
         transition: all 0.5s ease;
@@ -49,6 +51,29 @@
       .custom-leave-to {
         opacity: 0;
         transform: translateX(10px);
+      }
+      .bounce-enter-active {
+        animation: bounce-in 0.5s;
+      }
+      .bounce-leave-active {
+        animation: bounce-in 0.5s reverse;
+        /* 
+         Tersine çalıştır.
+        */
+      }
+      @keyframes bounce-in {
+        /* 0'da dolma 50'de dolma 100'de dolma işleminde yapılacaklar */
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.5);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -74,6 +99,10 @@
         <div class="alert alert-success" v-if="isCustomShowing">
           Özel Animasyonu
         </div>
+      </transition>
+
+      <transition name="bounce">
+        <div class="alert alert-success" v-if="isCustomShowing">Özel Animasyon</div>
       </transition>
     </div>
     <script
