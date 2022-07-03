@@ -182,7 +182,41 @@
           <div class="alert alert-success" v-else>Yüklendi</div>
         </div>
       </transition>
-      
+
+      <!-- 
+        Dinamik olarak component geçişi için kullanılmıştır.
+      -->
+
+      <input type="radio" v-model="page" value="p-about" /> Hakkımızda
+      <input type="radio" v-model="page" value="p-products" /> Ürünler
+      <input type="radio" v-model="page" value="p-contact" /> İletişim
+
+      <transition
+        name="component-animation"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated bounceOutRight"
+        mode="out-in"
+      >
+        <!-- 
+          Componentleri dinamik olarak tanımlamak için kullanıyoruz.
+          :is -> dinamik olarak component ismi bind etmekte ve o isme göre component çağırmaktadır.
+          v-bind=""
+         -->
+        <component :is="sayfa"></component>
+      </transition>
+
+      <!-- Route geçişleri -->
+
+      <div class="container">
+        <transition
+          name="component-animation"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated bounceOutRight"
+          mode="out-in"
+        >
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -204,6 +238,12 @@
           isFadeShowing: false,
           isCustomShowing: false,
           loading: false,
+          page: "p-products",
+        },
+        components: {
+          "p-about": { template: "<h1>Hakkımızda</h1>" },
+          "p-products": { template: "<h1>Ürünler</h1>" },
+          "p-contact": { template: "<h1>İletişim</h1>" },
         },
         methods: {
           //api isteklerinde kullanabiliriz.
