@@ -34,46 +34,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
       /*
-        Mixin uygulamalarımızda tekrar tekrar kullanacağımız method , data gibi özellikleri 
-        tek bir yerden çağırmamızı sağlayan bir yapıdır.
-        Data özelliği ezilirken method özelliği console üzerinde tekrar tekrar çalışır.
+       Cmd üzerinde npm run build diyerek dosyalarımızı publish işlemi için hazır edebiliriz.
+       npm run build dedikten sonra dist klasörü oluşturulacaktır.Bu dist klasörürün içindeki dataları ftp'ye aktarırız.
       */
-
-      // Global mixin
-
-      Vue.mixin({
-        data() {
-          return {
-            message: "Merhaba Mixin!",
-          };
-        },
-        created() {
-          console.log("Mixin oluşturuldu.");
-        },
-        methods: {
-          getdate() {
-            var date = new Date();
-            console.log("Mixin:", date.toLocaleDateString());
-          },
-        },
-      });
-
-      // Local mixin
-
-      var commonMixin = {
-        data: {
-          message: "Merhaba Mixin!",
-        },
-        created() {
-          console.log("Mixin oluşturuldu.");
-        },
-        methods: {
-          getDate() {
-            var date = new Date();
-            console.log("Mixin:", date.toLocaleDateString());
-          },
-        },
-      };
 
       const app = new Vue({
         el: "#app",
